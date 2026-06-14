@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MylSoft_Attachments::attachments"
+             title="Email Attachments"
+             module="MylSoft_Attachments"
+             sortOrder="100"
+             parent="Magento_Backend::marketing"
+             action="mylsoft_attachments/attachment/index"
+             resource="MylSoft_Attachments::attachments_manage"/>
+    </menu>
+</config>

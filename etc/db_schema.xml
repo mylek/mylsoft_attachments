@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mylsoft_attachment" resource="default" engine="innodb" comment="MylSoft Email Attachments">
+        <column xsi:type="int" name="attachment_id" unsigned="true" nullable="false" identity="true" comment="Attachment ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="filename" nullable="false" length="255" comment="Original File Name"/>
+        <column xsi:type="varchar" name="display_filename" nullable="true" length="255" comment="Display File Name (overrides filename in email if set)"/>
+        <column xsi:type="varchar" name="filepath" nullable="false" length="512" comment="Stored File Path"/>
+        <column xsi:type="varchar" name="email_template" nullable="false" length="255" comment="Email Template Identifier"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="date" name="valid_from" nullable="true" comment="Valid From Date"/>
+        <column xsi:type="date" name="valid_to" nullable="true" comment="Valid To Date"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="attachment_id"/>
+        </constraint>
+        <index referenceId="MYLSOFT_ATTACHMENT_EMAIL_TEMPLATE" indexType="btree">
+            <column name="email_template"/>
+        </index>
+    </table>
+</schema>

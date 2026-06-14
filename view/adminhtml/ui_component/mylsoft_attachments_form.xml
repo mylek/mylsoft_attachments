@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mylsoft_attachments_form.mylsoft_attachments_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Attachment Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back">
+                <url path="*/*/index"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
+            <button name="save_and_continue">
+                <class>save</class>
+                <label translate="true">Save and Continue Edit</label>
+                <param name="back">true</param>
+                <dataAttributeResolverClass>Magento\Backend\Block\Widget\Button\SaveAndContinueButton</dataAttributeResolverClass>
+                <url path="*/*/save"/>
+            </button>
+            <button name="save">
+                <url path="*/*/save"/>
+                <class>save primary</class>
+                <label translate="true">Save</label>
+            </button>
+        </buttons>
+        <namespace>mylsoft_attachments_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>mylsoft_attachments_form.mylsoft_attachments_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="mylsoft_attachments_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="MylSoft\Attachments\Ui\DataProvider\AttachmentFormDataProvider"
+                      name="mylsoft_attachments_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>attachment_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <label translate="true">General</label>
+            <collapsible>false</collapsible>
+        </settings>
+
+        <field name="attachment_id" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+
+        <field name="name" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="email_template" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Email Template</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MylSoft\Attachments\Model\EmailTemplateSource"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="is_active" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Active</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="MylSoft\Attachments\Model\Config\Source\IsActive"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="valid_from" formElement="date">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Valid From</label>
+                <tooltip>
+                    <description translate="true">Attachment will only be sent from this date. Leave empty for no start limit.</description>
+                </tooltip>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="dateFormat" xsi:type="string">MM/dd/yyyy</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+
+        <field name="valid_to" formElement="date">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Valid To</label>
+                <tooltip>
+                    <description translate="true">Attachment will only be sent until this date (inclusive). Leave empty for no end limit.</description>
+                </tooltip>
+            </settings>
+            <formElements>
+                <date>
+                    <settings>
+                        <options>
+                            <option name="dateFormat" xsi:type="string">MM/dd/yyyy</option>
+                        </options>
+                    </settings>
+                </date>
+            </formElements>
+        </field>
+
+        <field name="display_filename" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">File Name in Email</label>
+                <tooltip>
+                    <description translate="true">Overrides the file name shown to the recipient. Leave empty to use the original file name.</description>
+                </tooltip>
+            </settings>
+        </field>
+
+        <field name="file" formElement="fileUploader">
+            <settings>
+                <label translate="true">Attachment File</label>
+                <componentType>fileUploader</componentType>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <allowedExtensions>pdf doc docx xls xlsx jpg jpeg png zip</allowedExtensions>
+                        <maxFileSize>10485760</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="mylsoft_attachments/attachment/upload"/>
+                        </uploaderConfig>
+                    </settings>
+                </fileUploader>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

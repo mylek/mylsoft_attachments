@@ -1,0 +1,22 @@
+{
+    "name": "mylsoft/module-attachments",
+    "description": "Email attachments manager for Magento 2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "require": {
+        "php": "~8.1.0",
+        "magento/framework": "*",
+        "magento/module-backend": "*",
+        "magento/module-email": "*",
+        "magento/module-ui": "*",
+        "laminas/laminas-mime": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MylSoft\\Attachments\\": ""
+        }
+    }
+}

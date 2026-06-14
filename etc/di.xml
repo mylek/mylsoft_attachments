@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MylSoft\Attachments\Api\AttachmentRepositoryInterface"
+                type="MylSoft\Attachments\Model\AttachmentRepository"/>
+    <preference for="MylSoft\Attachments\Api\Data\AttachmentInterface"
+                type="MylSoft\Attachments\Model\Attachment"/>
+
+    <type name="Magento\Framework\Mail\Template\TransportBuilder">
+        <plugin name="mylsoft_attachments_transport_builder"
+                type="MylSoft\Attachments\Plugin\TransportBuilderPlugin"
+                sortOrder="10"/>
+    </type>
+</config>
