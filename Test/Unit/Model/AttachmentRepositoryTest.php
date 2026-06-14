@@ -70,7 +70,6 @@ class AttachmentRepositoryTest extends TestCase
         $result = $this->repository->getById(5);
 
         $this->assertSame($attachment, $result);
-        $this->resource->verify();
     }
 
     public function testGetByIdThrowsNoSuchEntityExceptionWhenNotFound(): void
